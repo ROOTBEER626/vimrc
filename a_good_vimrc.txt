@@ -1,0 +1,262 @@
+  1 set nocompatible              " be iMproved, required
+  2 filetype off                  " required
+  3
+  4 " set the runtime path to include Vundle and initialize
+  5 set rtp+=~/.vim/bundle/Vundle.vim
+  6 " alternatively, pass a path where Vundle should install plugins
+  7 "call vundle#begin('~/some/path/here')
+  8 "
+  9 " let Vundle manage Vundle, required
+ 10 "
+ 11 " The following are examples of different formats supported.
+ 12 " Keep Plugin commands between vundle#begin/end.
+ 13 " plugin on GitHub repo
+ 14 "
+ 15 " All of your Plugins must be added before the following line
+ 16 " filetype plugin indent on    " required
+ 17 " To ignore plugin indent changes, instead use:
+ 18 "filetype plugin on
+ 19 "
+ 20 " Brief help
+ 21 " :PluginList       - lists configured plugins
+ 22 " :PluginInstall    - installs plugins; append `!` to update or just
+ 23 " :PluginUpdate
+ 24 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+ 25 " :PluginClean      - confirms removal of unused plugins; append `!` to
+ 26 " auto-approve removal
+ 27 "
+ 28 " see :h vundle for more details or wiki for FAQ
+ 29 " Put your non-Plugin stuff after this line
+ 30 "
+ 31 "
+ 32 ".vimrc
+ 33 map <c-f> :call JsBeautify()<cr>
+ 34 " or
+ 35 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+ 36 " for html
+ 37 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+ 38 " for css or scss
+ 39 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+ 40
+ 41 "set t_Co=256
+ 42 syntax enable
+ 43 set background=dark
+ 44
+ 45 "Set Pathogen options
+ 46 " Pathogen only for html and CSS
+ 47 let g:user_emmet_install_global = 0
+ 48 " autocmd FileType html,css EmmetInstall
+ 49
+ 50 set number
+ 51
+ 52 " The width of a TAB is set to 4.
+ 53 " Still it is a \t. It is just that
+ 54 " Vim will interpret it to be having
+ 55 " a width of 4.
+ 56 set tabstop=4
+ 57 " Indents will have a width of 4
+ 58 set shiftwidth=2
+ 59 " Sets the number of columns for a TAB
+ 60 set softtabstop=2
+ 61 " Expand TABs to spaces
+ 62 set expandtab
+ 63 "Added below
+ 64 "do not save backup files
+ 65 set nobackup
+ 66 "do not let cursor scroll below or above N number of lines when scrolling
+ 67 let scrolloff=10
+ 68 "do wrap lines -> instead they extend as far as they need to
+ 69 set nowrap
+ 70 "While searching through a file incrementally highlight matching characters
+ 71 set incsearch
+ 72 "Ignore capital letters during search
+ 73 set ignorecase
+ 74 "Override the ignorecase^ if searching for a capital letter
+ 75 set smartcase
+ 76 "show partial command you type in the last line of the screen
+ 77 set showcmd
+ 78 "show mod eyou are in on the last line
+ 79 set showmode
+ 80 "show matching words during a search
+ 81 set showmatch
+ 82 "use highlighting when doing a search
+ 83 set hlsearch
+ 84 "set the commands to save in history default is 20
+ 85 set history=1000
+ 86
+ 87 let g:airline#extensions#tabline#enabled = 1
+ 88 let g:airline#extensions#tabline#left_sep = ' '
+ 89 let g:airline#extensions#tabline#left_alt_sep = '>'
+ 90 set laststatus=2
+ 91 let g:airline_powerline_fonts = 1
+ 92 "disable annoying banner
+ 93 let g:netrw_banner=0
+ 94 "open in prior window
+ 95 let g:netrw_browse_split=4
+ 96 "open splits to the right
+ 97 let g:netrw_altv=1
+ 98 "tree view
+ 99 let g:netrw_liststyle=3
+100 let g:netrw_list_hide=netrw_gitignore#Hide()
+101 let g:netr2_list_hide=',\(^|\s\s\)\zs\.\S+'
+102
+103 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+104
+105 set mouse=a
+106
+107 "Added myself
+108 "Disable compatibility with vi which can cause unexpected issues
+109 set nocompatible
+110 "Enable type file detection. Vim will be able to try to detect the type of f
+111 filetype on
+112 "Enable plugins and load plugin for the detected file type
+113 filetype plugin on
+114 "Load an indent file for the detected file type
+115 filetype indent on
+116
+117 "Tyurn syntax highlighting on.
+118 syntax on
+119
+120 "I will get the horizontal one later but I want to edit that a bit too
+121 "Highlight cursor line underneath the cursor horizontally
+122 set cursorline
+123 "for vertical line
+124 set cursorcolumn
+125
+126 "Enable auto completion menu after pressing TAB
+127 set wildmenu
+128 "Make wildmenu behave like similar to Bash completion
+129 set wildmode=list:longest
+130 "There are certain files that we would never want to edit with Vim
+131 "Wildmenu will ignore files with these extensions
+132 "set wildignore=*.docx,*.jpg,*png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.flv,*.img,
+133
+134 " PLUGINS ------------------------------------------------------------------
+135
+136 call plug#begin('~/.vim/plugged')
+137
+138   Plug 'dense-analysis/ale'
+139
+140   Plug 'preservim/nerdtree'
+141
+142   call plug#end()
+143
+144 "Plugin code goes here
+145
+146 "}}}
+147
+148 " MAPPINGS -----------------------------------------------------------------
+149
+150 "Set the baclslash as the leader key
+151 let mapleader = ","
+152 "map_mode <what_you_type> <what_is_executed>
+153 "nnoremap -> Allows you to map keys in normal mode
+154 "inoremap -> Allows you to map keys in insert mode
+155 "vnoremap -> Allows you to map keys in visual mode
+156 "Mappings code goes here
+157 "from insert mode jj will be the escape key to leave insert modee
+158 inoremap jj <esc>
+159 "Press the space bar to type the : character in command mode.
+160 nnoremap <space :
+161 "Pressing the letter o will open a new line below the current one.
+162 "Exit insert mode after creating a new line above or below the current line
+163 nnoremap o o<esc>
+164 nnoremap O O<esc>
+165
+166 "NERDTree specific mappings
+167 "Map the F3 key to toggle NERDTree open and close
+168 nnoremap <F3> :NERDTreeToggle<cr>
+169 "Snippets are also a kind of mapping
+170 nnoremap ,html :-1read$HOME/.vim/skeleton.html<CR>3jwf>a
+171
+172 "}}}
+173
+174 " VIMSCRIPT ----------------------------------------------------------------
+175
+176 "This will enable code folding.
+177 "Use the marker method of folding.
+178 augroup filetype_vim
+179   autocmd!
+180   autocmd FileType vim setlocal foldmethod=marker
+181 augroup END
+182
+183 "More Vimscripts code goes here.
+184
+185 "}}}
+186
+187 "STATUS LUNE ---------------------------------------------------------------
+188
+189 "Status bar code goes here.
+190 "CLear status line when vimrc is reloaded
+191 set statusline=
+DERK.docx				Spanish notes.docx
+My_Database.kdbx			me
+194 set statusline+=\ %F\ %M\ %Y\ %R
+195
+196 "Use a divider to seperate the left side from the right side
+197 set statusline+=%=
+198
+199 "Status line right side
+200 "%F -> Display the full path of the current file
+201 "%M -> Modified flag shows if file is unsaved
+202 "%Y -> Type of file in the buffer
+203 "%R -> Display the read only flag
+204 "%b -> SHows the ASCII/Unicode character under cursor
+205 "0x%B -> Shows the hexadecimal character under cursor
+206 "%l -> Display the row number
+207 "%c -> Display the column number
+208 "%p%% -> show the cursor percentage from the top of the file
+209 set statusline+=\ ascii:\ &b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+210
+211 "shows the status on the second to last line
+212 set laststatus=2
+213
+214 "}}}
+ ~/.vimrc  VIM                 ascii: &b hex: 0x22 row: 214 col: 1 percent: 100%
+-- VISUAL LINE --
+194 set statusline+=\ %F\ %M\ %Y\ %R
+195
+196 "Use a divider to seperate the left side from the right side
+197 set statusline+=%=
+198
+199 "Status line right side
+200 "%F -> Display the full path of the current file
+201 "%M -> Modified flag shows if file is unsaved
+202 "%Y -> Type of file in the buffer
+203 "%R -> Display the read only flag
+204 "%b -> SHows the ASCII/Unicode character under cursor
+205 "0x%B -> Shows the hexadecimal character under cursor
+206 "%l -> Display the row number
+207 "%c -> Display the column number
+208 "%p%% -> show the cursor percentage from the top of the file
+209 set statusline+=\ ascii:\ &b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+210
+211 "shows the status on the second to last line
+212 set laststatus=2
+213
+214 "}}}
+ ~/.vimrc  VIM                 ascii: &b hex: 0x22 row: 214 col: 1 percent: 100%
+-- VISUAL LINE --
+ 60 set softtabstop=2
+ 61 " Expand TABs to spaces
+ 62 set expandtab
+ 63 "Added below
+ 64 "do not save backup files
+ 65 set nobackup
+ 66 "do not let cursor scroll below or above N number of lines when scrolling
+ 67 let scrolloff=10
+ 68 "do wrap lines -> instead they extend as far as they need to
+ 69 set nowrap
+ 70 "While searching through a file incrementally highlight matching characters
+ 71 set incsearch
+ 72 "Ignore capital letters during search
+ 73 set ignorecase
+ 74 "Override the ignorecase^ if searching for a capital letter
+ 75 set smartcase
+ 76 "show partial command you type in the last line of the screen
+ 77 set showcmd
+ 78 "show mod eyou are in on the last line
+ 79 set showmode
+ 80 "show matching words during a search
+ 81 set showmatch
+ 82 "use highlighting when doing a search
